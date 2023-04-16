@@ -2,46 +2,29 @@
 """ Parses Logs """
 import sys
 
-# store the count of all status codes in a dictionary
-status_codes_dict = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
-                     '404': 0, '405': 0, '500': 0}
 
-total_size = 0
-count = 0  # keep count of the number lines counted
-
+i = 0
+FileSize = 0
+status = {'200': 0, '301': 0, '400': 0, '401': 0,
+          '403': 0, '404': 0, '405': 0, '500': 0}
+codes = ['200', '301', '400', '401', '403', '404', '405', '500']
 try:
     for line in sys.stdin:
-        line_list = line.split(" ")
-
-        if len(line_list) > 4:
-            status_code = line_list[-2]
-            file_size = int(line_list[-1])
-
-            # check if the status code receive exists in the dictionary and
-            # increment its count
-            if status_code in status_codes_dict.keys():
-                status_codes_dict[status_code] += 1
-
-            # update total size
-            total_size += file_size
-
-            # update count of lines
-            count += 1
-
-        if count == 10:
-            count = 0  # reset count
-            print('File size: {}'.format(total_size))
-
-            # print out status code counts
-            for key, value in sorted(status_codes_dict.items()):
-                if value != 0:
-                    print('{}: {}'.format(key, value))
-
-except Exception as err:
+        i += 1
+        sp = line.split(' ')
+        if len(sp) > 2:
+            FileSize += int(sp[-1])
+            if sp[-2] in status:
+                status[sp[-2]] += 1
+        if i % 10 == 0:
+            print("File size: {}".format(FileSize))
+            for code in codes:
+                if status[code]:
+                    print("{}: {}".format(code, status[code]))
+except KeyboardInterrupt:
     pass
-
 finally:
-    print('File size: {}'.format(total_size))
-    for key, value in sorted(status_codes_dict.items()):
-        if value != 0:
-            print('{}: {}'.format(key, value))
+    print("File size: {}".format(FileSize))
+    for code in codes:
+        if status[code]:
+            print("{}: {}".format(code, status[code]))
