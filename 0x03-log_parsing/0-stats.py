@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" Parses Logs """
+"""stats module
+"""
 from sys import stdin
 
 
