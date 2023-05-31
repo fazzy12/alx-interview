@@ -4,46 +4,25 @@
 
 
 def isWinner(x, nums):
-    # Define a helper function to check if a number is prime
-
-
-def is_prime(num):
-    if num < 2:
-        return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
-
-
-# Count the number of wins for each player
-maria_wins = 0
-ben_wins = 0
-
-# Iterate over each round
-for n in nums:
-    primes = []
-    # Generate a list of prime numbers up to n
-    for i in range(2, n + 1):
-        if is_prime(i):
-            primes.append(i)
-
-    # Determine the winner for the current round
-    maria_turn = True
-    while primes:
-        selected_prime = primes.pop(0)
-        primes = [p for p in primes if p % selected_prime != 0]
-        maria_turn = not maria_turn
-
-    if maria_turn:
-        ben_wins += 1
-    else:
-        maria_wins += 1
-
-# Determine the overall winner
-if maria_wins > ben_wins:
-    return "Maria"
-elif ben_wins > maria_wins:
-    return "Ben"
-else:
-    return None
+    """Determines the winner of a prime game session with `x` rounds.
+    """
+    if x < 1 or not nums:
+        return None
+    marias_wins, bens_wins = 0, 0
+    # generate primes with a limit of the maximum number in nums
+    n = max(nums)
+    primes = [True for _ in range(1, n + 1, 1)]
+    primes[0] = False
+    for i, is_prime in enumerate(primes, 1):
+        if i == 1 or not is_prime:
+            continue
+        for j in range(i + i, n + 1, i):
+            primes[j - 1] = False
+    # filter the number of primes less than n in nums for each round
+    for _, n in zip(range(x), nums):
+        primes_count = len(list(filter(lambda x: x, primes[0: n])))
+        bens_wins += primes_count % 2 == 0
+        marias_wins += primes_count % 2 == 1
+    if marias_wins == bens_wins:
+        return None
+    return 'Maria' if marias_wins > bens_wins else 'Ben'
