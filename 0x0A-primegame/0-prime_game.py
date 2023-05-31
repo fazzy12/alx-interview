@@ -3,41 +3,47 @@
 """
 
 
+def isWinner(x, nums):
+    # Define a helper function to check if a number is prime
+
+
 def is_prime(num):
     if num < 2:
         return False
-    for i in range(2, int(num**0.5) + 1):
+    for i in range(2, int(num ** 0.5) + 1):
         if num % i == 0:
             return False
     return True
 
 
-def isWinner(x, nums):
-    wins = [0, 0]  # Maria's wins and Ben's wins
+# Count the number of wins for each player
+maria_wins = 0
+ben_wins = 0
 
-    for num in nums:
-        turn = 0  # 0 for Maria, 1 for Ben
-        primes = [p for p in range(2, num + 1) if is_prime(p)]
+# Iterate over each round
+for n in nums:
+    primes = []
+    # Generate a list of prime numbers up to n
+    for i in range(2, n + 1):
+        if is_prime(i):
+            primes.append(i)
 
-        while primes:
-            if turn == 0:  # Maria's turn
-                for prime in primes:
-                    if prime <= num:
-                        primes = [p for p in primes if p % prime != 0]
-                        wins[0] += 1
-                        turn = 1  # Switch to Ben's turn
-                        break
-            else:  # Ben's turn
-                for prime in primes:
-                    if prime <= num:
-                        primes = [p for p in primes if p % prime != 0]
-                        wins[1] += 1
-                        turn = 0  # Switch to Maria's turn
-                        break
+    # Determine the winner for the current round
+    maria_turn = True
+    while primes:
+        selected_prime = primes.pop(0)
+        primes = [p for p in primes if p % selected_prime != 0]
+        maria_turn = not maria_turn
 
-    if wins[0] > wins[1]:
-        return "Maria"
-    elif wins[0] < wins[1]:
-        return "Ben"
+    if maria_turn:
+        ben_wins += 1
     else:
-        return None
+        maria_wins += 1
+
+# Determine the overall winner
+if maria_wins > ben_wins:
+    return "Maria"
+elif ben_wins > maria_wins:
+    return "Ben"
+else:
+    return None
