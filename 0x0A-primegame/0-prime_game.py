@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+"""Prime game module.
+"""
+
+
 def is_prime(num):
     if num < 2:
         return False
