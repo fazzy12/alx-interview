@@ -1,11 +1,13 @@
 #!/usr/bin/python3
+"""Change making module.
+"""
 
 def makeChange(coins, total):
-if total < 0:
-    return -1
-
-# Create a list to store the minimum number of coins needed for each amount
-# Initialize the list with a value larger than the total amount
+    if total < 0:
+        return -1
+"""Determines the fewest number of coins needed to meet a given
+amount total when given a pile of coins of different values.
+"""
 dp = [float('inf')] * (total + 1)
     
 # Base case: 0 coins needed for a total of 0
