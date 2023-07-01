@@ -45,8 +45,8 @@ Please refer to the 0-island_perimeter.py file for the implementation.
 
 ## Repository
 
-GitHub repository: [alx-interview]()
-Directory: [0x09-island_perimeter]()
-File: [0-island_perimeter.py]()
+GitHub repository: [alx-interview](https://github.com/fazzy12/alx-interview/tree/main)
+Directory: [0x09-island_perimeter](https://github.com/fazzy12/alx-interview/tree/main/0x09-island_perimeter)
+File: [0-island_perimeter.py](https://github.com/fazzy12/alx-interview/blob/main/0x09-island_perimeter/0-island_perimeter.py)
 
 This project is part of the ALX Africa Software Engineering Curriculum

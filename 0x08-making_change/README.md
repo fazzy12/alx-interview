@@ -36,7 +36,7 @@ Please refer to the [0-making_change.py]() file for the implementation.
 ### Repository
 
 - GitHub repository: [alx-interview](https://github.com/fazzy12/alx-interview/tree/main)
-- Directory: [0x08-making_change]()
-- File: 0-making_change.py
+- Directory: [0x08-making_change](https://github.com/fazzy12/alx-interview/tree/main/0x08-making_change)
+- [File: 0-making_change.py](https://github.com/fazzy12/alx-interview/blob/main/0x08-making_change/0-making_change.py)
 
 This project is part of the ALX Africa Software Engineering Curriculum
