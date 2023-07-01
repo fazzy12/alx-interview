@@ -2,24 +2,24 @@
 """Change making module.
 """
 
+
 def makeChange(coins, total):
-    if total < 0:
-        return -1
-"""Determines the fewest number of coins needed to meet a given
-amount total when given a pile of coins of different values.
-"""
-dp = [float('inf')] * (total + 1)
-    
-# Base case: 0 coins needed for a total of 0
-dp[0] = 0
-
-# Iterate through each coin value
-for coin in coins:
-    # For each amount from the coin value to the total
-    for amount in range(coin, total + 1):
-        # Update the minimum number of coins needed if the current coin is used
-        dp[amount] = min(dp[amount], dp[amount - coin] + 1)
-
-# If the minimum number of coins for the total is still larger than the total,
-# it means the total cannot be met by the given coins
-return dp[total] if dp[total] != float('inf') else -1
+    """Determines the fewest number of coins needed to meet a given
+    amount total when given a pile of coins of different values.
+    """
+    if total <= 0:
+        return 0
+    rem = total
+    coins_count = 0
+    coin_idx = 0
+    sorted_coins = sorted(coins, reverse=True)
+    n = len(coins)
+    while rem > 0:
+        if coin_idx >= n:
+            return -1
+        if rem - sorted_coins[coin_idx] >= 0:
+            rem -= sorted_coins[coin_idx]
+            coins_count += 1
+        else:
+            coin_idx += 1
+    return coins_count
